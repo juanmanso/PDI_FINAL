@@ -1,0 +1,95 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}		% Configuro la codificación
+\input{config.tex}				% Archivo con los comandos globales como Título y autores
+\input{preamble.tex}
+\input{aux_functions.tex}		% Se proveen un conjunto de funciones extras
+
+% Defino el path de los includegraphics
+\graphicspath{{./Figuras/}}		% Directorio que contiene los graficos
+
+% Defino el path para los input de .tex y de .eps
+\makeatletter
+\def\input@path{{./Figuras/}{./Secciones/}{./Cover_page/}}
+\makeatother
+
+% Defino el path del listings
+\ifListings
+%% Cambiar el nombre de la carpeta si se utilizan Listings
+	\lstinputpath{{../code/}}
+\fi
+
+\definecolor{myred}{rgb}{0.5,0,0}
+\definecolor{mygreen}{rgb}{0,0.5,0}
+
+%\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\begin{document}
+		% Carátula (formal o simple,_formal o _simple respectivamente) con Resumen
+		% incluido e Índice (si es necesario configurar en config.tex) del informe
+		\input{cover_simple.tex}
+	\setcounter{page}{1}
+
+	\renewcommand{\thesection}{\Roman{section}}
+	\begin{multicols}{2}
+
+	{\centering\section{Introducción}}
+		\input{1_intro.tex}
+
+	\vspace{0.2cm}
+	{\centering\section{Desarrollo}}
+		\input{2_he.tex}
+		\input{3_ace.tex}
+		\input{4_res.tex}
+
+	\vspace{0.2cm}
+	{\centering\section{Conclusiones}}
+		\input{5_conc.tex}
+
+	\end{multicols}
+
+	\pagebreak
+	\appendix
+		\section{Imágenes de prueba}
+			Para generar las imágenes de prueba con el método ACE, se utilizó un modo de operación uniforme de $\eta^1 = \begin{bmatrix} 0.5 & 0.5 & 0.5\end{bmatrix}$.
+			\subsection{Total Recall}
+				\HgraficarPNG{0.16}{result_orig_totalrecall}{Imagen Original}{fig:app_og_tr}
+				\HgraficarPNG{0.16}{result_he_totalrecall}{Imagen modificada por HE}{fig:app_he_tr}
+				\HgraficarPNG{0.16}{result_ace_totalrecall}{Imagen modificada por ACE}{fig:app_ace_tr}
+			\subsection{Shadowlands}
+				\HgraficarPNG{0.18}{result_orig_shadowlands}{Imagen Original}{fig:app_og_sl}
+				\HgraficarPNG{0.18}{result_he_shadowlands}{Imagen modificada por HE}{fig:app_he_sl}
+				\HgraficarPNG{0.18}{result_ace_shadowlands}{Imagen modificada por ACE}{fig:app_ace_sl}
+			\subsection{Odín}
+				\HgraficarPNG{0.18}{result_orig_odin}{Imagen Original}{fig:app_og_od}
+				\HgraficarPNG{0.18}{result_he_odin}{Imagen modificada por HE}{fig:app_he_od}
+				\HgraficarPNG{0.18}{result_ace_odin}{Imagen modificada por ACE}{fig:app_ace_od}
+
+		\section{Imágenes oscuras con un modo de operación personalizado}
+			Si se realizan modificaciones al modo de operación, las imágenes pueden mejorar su contraste considerablemente. En este ejemplo, se utiliza un $\eta^2 = \begin{bmatrix} 0.4 & 0.5 & 0.1\end{bmatrix}$ para concentrar la mejora en las zonas oscuras y medias. El contraste puede disminuir pero también lo hacen los artefactos en la imagen.
+			\subsection{Total Recall}
+				\HgraficarPNG{0.25}{result_ace_totalrecall}{Imagen modificada por ACE}{fig:app_ace_tr2}
+				\HgraficarPNG{0.25}{alt_totalrecall}{Imagen modificada utilizando $\eta^2$}{fig:app_he_alt}
+			\subsection{Shadowlands}
+				\HgraficarPNG{0.27}{result_ace_shadowlands}{Imagen modificada por ACE}{fig:app_ace_sl2}
+				\HgraficarPNG{0.27}{alt_shadowlands}{Imagen modificada utilizando $\eta^2$}{fig:app_he_alt}
+
+		\pagebreak
+		\section{Funciones principales}
+			\subsection{tpf.m}
+				\lstinputlisting[caption = \texttt{tpf.m}]{tpf.m}
+			\subsection{ace.m}
+				\lstinputlisting[caption = \texttt{ace.m}]{utils/ace.m}
+%
+		\section{Funciones auxiliares}
+			\subsection{cdf.m}
+				\lstinputlisting[caption = \texttt{cdf.m}]{utils/cdf.m}
+			\subsection{histo.m}
+				\lstinputlisting[caption = \texttt{histo.m}]{utils/histo.m}
+			\subsection{equalizer.m}
+				\lstinputlisting[caption = \texttt{equalizer.m}]{utils/equalizer.m}
+			\subsection{weighted\_factor.m}
+				\lstinputlisting[caption = \texttt{weighted\_factor.m}]{utils/weighted_factor.m}
+			\subsection{psnr.m}
+				\lstinputlisting[caption = \texttt{psnr.m}]{utils/psnr.m}
+\end{document}

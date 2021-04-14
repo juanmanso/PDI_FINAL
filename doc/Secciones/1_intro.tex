@@ -1,0 +1,20 @@
+
+En el presente trabajo se analizan dos métodos para la mejora de imágenes
+al variar el contraste de las mismas. En clase vimos los métodos de
+\emph{streching} y la \emph{ecualización del histograma} o \emph{HE}. El primer
+método busca aumentar el rango dinámico del histograma, mientras que el segundo
+busca distribuir los valores del histograma (estimación de la función densidad
+$f(x)$) de forma tal que la distribución resultante se asemeje a la de una
+uniforme. \\
+
+Según el método propuesto por Srinivasan y Balram\footnote{Srinivasan, S
+\& Balram, Nikhil. (2006). Adaptive contrast enhancement using local region
+stretching.}, la mejora de contraste puede realizarse con ecualizaciones
+locales a regiones particulares del histograma ponderadas por una función de
+pesos. Esta propuesta (\emph{adaptative contrast enhancement} o \emph{ACE})
+muestra ser una mejora a la ecualización del histograma dado que se pueden
+obtener resultados que se adapten a la imagen de entrada, resaltando zonas
+oscuras o también mejorando el contraste entre objetos.
+
+A continuación se realizará la comparación entre el método \emph{ACE} y el
+método \emph{HE}.
